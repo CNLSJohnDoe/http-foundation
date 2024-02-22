@@ -285,7 +285,7 @@ class Response
             $charset = $this->charset ?: 'UTF-8';
             if (!$headers->has('Content-Type')) {
                 $headers->set('Content-Type', 'text/html; charset='.$charset);
-            } elseif (0 === stripos($headers->get('Content-Type'), 'text/') && false === stripos($headers->get('Content-Type'), 'charset')) {
+            } elseif (0 === stripos((string) $headers->get('Content-Type'), 'text/') && false === stripos((string) $headers->get('Content-Type'), 'charset')) {
                 // add the charset
                 $headers->set('Content-Type', $headers->get('Content-Type').'; charset='.$charset);
             }
@@ -1260,7 +1260,7 @@ class Response
      */
     protected function ensureIEOverSSLCompatibility(Request $request)
     {
-        if (false !== stripos($this->headers->get('Content-Disposition'), 'attachment') && preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT'), $match) == 1 && true === $request->isSecure()) {
+        if (false !== stripos((string) $this->headers->get('Content-Disposition'), 'attachment') && preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT'), $match) == 1 && true === $request->isSecure()) {
             if ((int) preg_replace('/(MSIE )(.*?);/', '$2', $match[0]) < 9) {
                 $this->headers->remove('Cache-Control');
             }
