@@ -89,6 +89,9 @@ class FileBag extends ParameterBag
 
         $file = $this->fixPhpFilesArray($file);
         if (is_array($file)) {
+	    if (isset($file['full_path'])) {
+	        unset($file['full_path']);
+	    }
             $keys = array_keys($file);
             sort($keys);
 
@@ -127,6 +130,10 @@ class FileBag extends ParameterBag
         if (!is_array($data)) {
             return $data;
         }
+
+	if (isset($data['full_path'])) {
+	    unset($data['full_path']);
+	}
 
         $keys = array_keys($data);
         sort($keys);
