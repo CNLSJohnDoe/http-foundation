@@ -95,7 +95,7 @@ class FileBag extends ParameterBag
             $keys = array_keys($file);
             sort($keys);
 
-            if (array_intersect_key(self::$fileKeys, $keys) == self::$fileKeys) {
+            if (array_intersect(self::$fileKeys, $keys) == self::$fileKeys) {
                 if (UPLOAD_ERR_NO_FILE == $file['error']) {
                     $file = null;
                 } else {
